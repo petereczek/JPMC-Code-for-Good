@@ -1,0 +1,21 @@
+.messageBox{
+    display: flex;
+
+}
+.messageBox img{
+    width: 10%;
+}
+
+.messageBox p{
+    width: 90%;
+}
+
+@media screen and (max-width: 500px)
+{
+    .messageBox img{
+
+    };
+    .messageBox p{
+
+    };
+}

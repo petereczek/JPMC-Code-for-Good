@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <title>Testimonials</title>
+  </head>
+
+  <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+    <!-- Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // TODO: Hide this from git
+      var firebaseConfig = {
+        apiKey: "AIzaSyBgpM5QEZRAXnN4sVnQIdZ99GMt9VeJXuw",
+        authDomain: "cfg-team6-shatterproof.firebaseapp.com",
+        databaseURL: "https://cfg-team6-shatterproof.firebaseio.com",
+        projectId: "cfg-team6-shatterproof",
+        storageBucket: "",
+        messagingSenderId: "726889625064",
+        appId: "1:726889625064:web:c0b3e2b00e6825085f205d"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.database();
+
+      // // call firebase here?
+      // var ambassadorsRef = db.ref().child('tables/ambassadors');
+      // ambassadorsRef.on("value", function(snapshot) {
+      //   // console.log(snapshot.val());
+      //
+      //   snapshot.forEach(function(snapshotRef) {
+      //     var value = snapshotRef.val();
+      //     // var formattedValue = (
+      //     //   <div>
+      //     //     <p>value.name</p>
+      //     //     <p>value.referral</p>
+      //     //   </div>
+      //     // );
+      //     console.log(value.name);
+      //     console.log(value.referral);
+      //   });
+      // }, function (errorObject) {
+      //   console.log("The read failed: " + errorObject.code);
+      // });
+
+      function writeUserData(engagements) {
+        var caption = document.getElementById("form-caption");
+        var name = document.getElementById("form-name");
+        var image = document.getElementById("form-image-url");
+
+        firebase.database().ref("tables/testimonials/").push({
+          engagements: engagements,
+          testimony: caption.value,
+          name : name.value,
+          image: image.value
+        });
+        console.log("IN WRITE FUNC");
+
+        alert("STORED ON DATABASE!");
+      }
+
+      // writeUserData("99", "TEST", "john doe", "images/url.com")
+    </script>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-success">
+      <a class="navbar-brand" href="index.html">Shatterproof</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="events.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="testimonials.html">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fund.html">Fund</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chatbot.html">Chatbot</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- FOR FB INTEGRATION -->
+    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
+    <div id='fb-root'></div>
+    <script async defer crossorigin='anonymous' src='https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=499235243890351&autoLogAppEvents=1'></script>
+
+    <div class="container text-center mt-5">
+      <form onsubmit=writeUserData("0")>
+        Name: <input type="text" id="form-name" />
+        <br />
+        Caption: <input type="text" id="form-caption" />
+        <br />
+        Image Url: <input type="text" id="form-image-url" />
+
+        <br />
+        <button class="btn btn-primary" type="submit">Button</button>
+      </form>
+    </div>
+
+    <div id="node-id">
+    </div>
+
+    <script>
+    // // call firebase here?
+    var testimonialsRef = db.ref().child('tables/testimonials');
+    testimonialsRef.on("value", function(snapshot) {
+      // console.log(snapshot.val());
+
+      snapshot.forEach(function(snapshotRef) {
+        var value = snapshotRef.val();
+        // var formattedValue = (
+        //   <div>
+        //     <p>value.name</p>
+        //     <p>value.referral</p>
+        //   </div>
+        // );
+        // console.log(value.engagements + "\n");
+        // console.log(value.name + "\n");
+        // console.log(value.testimony + "\n");
+        // console.log(value.image + "\n");
+        // console.log("\n");
+
+
+        var codeBlock = "<div class='container border border-primary'>Engagements: <div>" + value.engagements + "</div><br/>" + "Name: <div>" + value.name + "</div><br/>" + "Testimony: <div>" + value.testimony + "</div><br/>" + "Image: <div>" + value.image + "</div><br/></div>" + "<br />";
+
+        var d1 = document.getElementById('node-id');
+        d1.insertAdjacentHTML('afterend', codeBlock);
+      });
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+    </script>
+  </body>
+</html>

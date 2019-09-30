@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <title>Chatbot</title>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-success">
+      <a class="navbar-brand" href="index.html">Shatterproof</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="events.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="testimonials.html">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="fund.html">Fund</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chatbot.html">Chatbot</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="chat" class="text-center">
+        <div class="chat_header">SHATTERPROOF</div>
+        <div id="chat_s"></div>
+        <script type="text/javascript">
+            var submitted = false;
+            </script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){add()}"></iframe>
+        <html>
+            <head>
+                <link rel="stylesheet" type="text/css" href="design.css" media="screen" />
+                <script>
+                    var qn = 1;
+                    know = {
+                        //"Hello" : "Hi! Are you in need of immediate help? (yes/no)",
+                        "yes" : {
+                            "1" : "Are you inquiring about yourself? (yes/no)",
+                            "2" : "Choose options 1 (Addiction), 2 (Prevention), 3 (Treatment), 4 (Recovery), or 5 (more)"
+                        },
+                        "no" : {
+                            "1" : "Bye! take care..",
+                            "2" : '<a href="http://www.shatterproof.org/about">Resources</a>',
+                        },
+                        "5" : "Would you like to see testimonials, events, ambassador, or donations?",
+                        "1" : '<a href="http://www.shatterproof.org/about-addiction">Addiction</a>',
+                        "2" : '<a href="http://www.shatterproof.org/prevention">Prevention</a>',
+                        "3" : '<a href="http://www.shatterproof.org/treatment">Treatment</a>',
+                        "4" : '<a href="http://www.shatterproof.org/recovery">Recovery</a>',
+                        "ambassador" : '<a href="https://www.shatterproof.org/community/become-an-ambassador">Ambassador</a>',
+                        "testimonials" : "testimonial link (from cyrus)",
+                        "events" : "events link (from peter)",
+                        "event" : "events link (from peter)",
+                        "testimonial" : "testimonial link (from cyrus)",
+                        "donate" : '<a href="https://connect.clickandpledge.com/w/Form/4e21c330-0011-430e-a2c0-5400c4ba45d5">Donation</a>',
+                        "donations" : '<a href="https://connect.clickandpledge.com/w/Form/4e21c330-0011-430e-a2c0-5400c4ba45d5">Donation</a>',
+                    };
+                function talk() {
+                    var user = document.getElementById("userBox").value;
+                    document.getElementById("userBox").value = "";
+                    document.getElementById("chatLog").innerHTML += user+"<br>";
+                    if (user in know) {
+                        if (user == "yes"){
+                            if (qn == 1){
+                                console.log(know[user]["1"])
+                                document.getElementById("chatLog").innerHTML += know[user][qn.toString()]+"<br>";
+                            }
+                            if (qn == 2){
+                                console.log(know[user]["2"])
+                                document.getElementById("chatLog").innerHTML += know[user][qn.toString()]+"<br>";
+                            }
+                        }
+                        else if (user == "no"){
+                            if (qn == 1){
+                                console.log(know[user]["1"])
+                                document.getElementById("chatLog").innerHTML += know[user][qn.toString()]+"<br>";
+                                document.getElementById("userBox").style.display = "none";
+                            }
+                            if (qn == 2){
+                                console.log(know[user]["2"])
+                                document.getElementById("chatLog").innerHTML += know[user][qn.toString()]+"<br>";
+                                document.getElementById("userBox").style.display = "none";
+
+
+                            }
+                        }
+                        else {
+                            document.getElementById("chatLog").innerHTML += know[user]+"<br>";
+                        }
+                    }
+                    else {
+                        document.getElementById("chatLog").innerHTML += "I don't understand...<br>";
+                    }
+                    if (qn < 2){
+                        qn += 1;
+                    }
+                    console.log(qn)
+                }
+                </script>
+            </head>
+            <body style = "background-color : #E0E6E4">
+                <div style="
+                    max-width: 500px;
+                    max-height: 400px;
+                    overflow-y: scroll;
+                    right: 400;
+                    bottom: 300;
+                    ">
+                    <p id="chatLog">Are you in need of immediate help? (yes/no) <br></p>
+                    <input
+                    style="
+              color: black
+                    "
+                    id="userBox" type="text" onkeydown="if (event.keyCode == 13) {talk()}
+                    ">
+                        </div>
+            </body>
+        </html>
+
+    </div>
+
+  </body>
+</html>
